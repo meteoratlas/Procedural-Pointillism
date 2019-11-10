@@ -1,8 +1,4 @@
-class Walker{
-  // Position
-  int x,y;
-  int lifeSpan;
-  
+class Walker extends Drawer { 
   // Variables that modify the step (distance travelled each update)
   int stepSize = 8;
   double stepMultiplier = 1;
@@ -14,21 +10,19 @@ class Walker{
   int alpha = 255;
   double alphaMultiplier = 1;
   
-  boolean useStroke = false;
-  
   public Walker(int x, int y, int life){
-    this.x = x;
-    this.y = y;
-    lifeSpan = life;
-    if (!useStroke) { noStroke(); }
+    super(x, y, life);
   }
   
   // Update this walker
   void step(){
-    lifeSpan--;
-    if (lifeSpan <= 0) die();
-    
+    super.step();
     walk();
+    paint();
+  }
+  
+  void paint(){
+    super.paint();
     fill(img.get(x,y), alpha);
     rect(x, y, 8,8);
   }
@@ -46,11 +40,7 @@ class Walker{
   }
   
   void die(){
+    super.die();
   }
-  
-  void tri(int x, int y, int size){
-      triangle(x - size / 2, y + size / 2,
-               x - size / 2, y - size / 2,
-               x + size / 2, y + size / 2);
-  }
+ 
 }
